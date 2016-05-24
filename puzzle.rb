@@ -1,12 +1,14 @@
 class Puzzle
   attr_reader :dimension
+  attr_accessor :steps
 
   def initialize(args)
     @positions = args.fetch(:positions)
     @dimension = args.fetch(:dimension)
+    @steps = args.fetch(:steps, 0)
   end
 
-  def print
+  def to_s
     temp = ''
     @positions.each_with_index do |pos, index|
       temp +=  ' [' +pos.to_s + '] '
@@ -36,26 +38,18 @@ class Puzzle
     if(@count == nil)
       @count = 0
       @positions.each_with_index do |pos, index|
-        if pos != index+1
-          @count += 1
-        end
+        @count += count_position(index, pos)
       end
     end
     @count
   end
 
   def correct?
-    positions_without_last = @positions[0, @positions.size-1]
-    positions_without_last.each_with_index do |pos, index|
-      if pos != index+1
-        return false
-      end
-    end
-    return true
+    count_false_positions == 0
   end
 
   def copy
-    Puzzle.new(positions: Array.new(@positions), dimension: @dimension)
+    Puzzle.new(positions: Array.new(@positions), dimension: @dimension, steps: @steps + 1)
   end
 
   def switch(pos_1, pos_2)
@@ -66,6 +60,15 @@ class Puzzle
     self.set_value(pos_1, value_2)
     self
   end
+
+  private
+      def count_position(index, value)
+        comp =   value.to_i > 0  ? value : (@dimension*@dimension)
+        if comp != index+1
+          return 1
+        end
+        return 0
+      end
 end
 
 class Position
