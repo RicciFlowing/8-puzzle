@@ -19,8 +19,13 @@ class Node
     @data     = args.fetch(:data)
   end
 
-  def append
-    Shuffle.next(self)
+  def children
+    data = Shuffle.next(@data)
+    data.map!{ |x| Node.new(data: x, previous: self) }
+  end
+
+  def to_a
+    [self]
   end
 end
 
@@ -30,14 +35,15 @@ class Tree
   end
 
   def append(node)
+    @nodes += node.children
   end
 
   def root
     @nodes.bsearch {|x| x.previous = nil}
   end
 end
-
-Tree.new(Node.new(previous == nil))
+root = Node.new(data: puzzle2, previous: nil)
+Tree.new(nodes: Node.new(data: puzzle2, previous: nil)).append(root)
 
 # Breadthsearch (restrictid)
 
