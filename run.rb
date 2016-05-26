@@ -13,15 +13,11 @@ puzzle3  = Puzzle.new(positions: [11,5,12,14,15,2,nil,9,13,7,6,1,3,10,4,8], dime
 puzzles = [puzzle3]
 
 class Node
-  attr_accessor :data, :previous
+  attr_accessor :data, :previous, :children
   def initialize(args)
     @previous = args.fetch(:previous)
     @data     = args.fetch(:data)
-  end
-
-  def children
-    data = Shuffle.next(@data)
-    data.map!{ |x| Node.new(data: x, previous: self) }
+    @children = args.fetch(:children, nil)
   end
 
   def to_a
@@ -29,22 +25,38 @@ class Node
   end
 end
 
-class Tree
+class PuzzleNode < Node
   def initialize(args)
-    @nodes = args.fetch(:nodes).to_a
+    super(args)
   end
 
-  def append(node)
-    @nodes += node.children
-  end
-
-  def root
-    @nodes.bsearch {|x| x.previous = nil}
+  def add_children
+    @children = Shuffle.next(@data).map!{ |x| Node.new(data: x, previous: self) }
   end
 end
-root = Node.new(data: puzzle2, previous: nil)
-Tree.new(nodes: Node.new(data: puzzle2, previous: nil)).append(root)
 
+
+class Tree
+  attr_reader :root
+
+  def initialize(args)
+    @root = args.fetch(:root).to_a
+  end
+
+  def children(node)
+    node.children
+  end
+
+  def parent(node)
+    node.previous
+  end
+end
+
+root = PuzzleNode.new(data: puzzle2, previous: nil)
+p Tree.new(root: Node.new(data: puzzle2, previous: nil))
+p root.children
+p root.add_children
+p root.children
 # Breadthsearch (restrictid)
 
 def breadth_search(puzzles, count)
