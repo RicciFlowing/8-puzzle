@@ -13,11 +13,10 @@ class Puzzle
     @positions.each_with_index do |pos, index|
       temp +=  ' [' +pos.to_s + '] '
       if (index+1) % @dimension === 0
-        p temp
-        temp = ''
+        temp += "\n"
       end
     end
-    puts "\n\n"
+    temp += "\n\n"
   end
 
   def value(pos)

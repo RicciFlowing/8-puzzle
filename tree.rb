@@ -9,6 +9,10 @@ class Node
   def to_a
     [self]
   end
+
+  def to_s
+    @data.to_s
+  end
 end
 
 class PuzzleNode < Node
@@ -31,5 +35,21 @@ class PuzzleNode < Node
 
   def heuristic
     return  @data.count_false_positions
+  end
+end
+
+module SolutionPrinter
+  def self.solution(node)
+    unless node
+      return "No solution found"
+    end
+    count = 0
+    str = ""
+    until node.previous.nil? do
+      count += 1
+      node = node.previous
+      str += node.to_s unless node.to_s.nil?
+    end
+    str = str+ count.to_s
   end
 end
