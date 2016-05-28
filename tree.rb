@@ -17,7 +17,20 @@ class PuzzleNode < Node
   end
 
   def add_children
-    @children = Shuffle.next(@data).map!{ |x| Node.new(data: x, previous: self) }
+    @children = Shuffle.next(@data).map!{ |x| PuzzleNode.new(data: x, previous: self) }
+    @children
+  end
+
+  def children
+    @children = @children || self.add_children
+  end
+
+  def correct?
+    @data.correct?
+  end
+
+  def heuristic
+    return  @data.count_false_positions
   end
 end
 
