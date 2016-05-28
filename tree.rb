@@ -33,20 +33,3 @@ class PuzzleNode < Node
     return  @data.count_false_positions
   end
 end
-
-
-class Tree
-  attr_reader :root
-
-  def initialize(args)
-    @root = args.fetch(:root).to_a
-  end
-
-  def children(node)
-    node.children
-  end
-
-  def parent(node)
-    node.previous
-  end
-end

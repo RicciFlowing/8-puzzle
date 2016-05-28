@@ -14,8 +14,8 @@ puzzles = [puzzle3]
 
 class BreadthSearch
   def initialize(args)
-    @tree = args.fetch(:tree)
-    @puzzles = Queue.new(data: @tree.root)
+    @root = args.fetch(:root)
+    @puzzles = Queue.new(data: @root)
   end
 
   def find(count)
@@ -33,8 +33,8 @@ end
 
 class HeuristicASearch
   def initialize(args)
-    @tree = args.fetch(:tree)
-    @puzzles = PriorityQueue.new(data: @tree.root)
+    @root = args.fetch(:root)
+    @puzzles = PriorityQueue.new(data: @root)
   end
 
   def find(count)
@@ -54,5 +54,5 @@ end
 
 root = PuzzleNode.new(data: puzzle3, previous: nil)
 
-puts Benchmark.measure { p BreadthSearch.new(tree: Tree.new(root: root)).find(2000) }
-puts Benchmark.measure { p HeuristicASearch.new(tree: Tree.new(root: root)).find(2000) }
+puts Benchmark.measure { p BreadthSearch.new(root: root).find(2000) }
+puts Benchmark.measure { p HeuristicASearch.new(root: root).find(2000) }
