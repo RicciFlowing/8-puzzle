@@ -14,8 +14,8 @@ puzzle4  = Puzzle.new(positions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,nil], dime
 puzzle5  = Shuffle.shuffle(puzzle4, 20)
 
 root = PuzzleNode.new(data: puzzle3, previous: nil)
-puts Benchmark.measure { puts BreadthSearch.new(root: root).find(2000) }
-puts Benchmark.measure { puts HeuristicASearch.new(root: root).find(2000) }
+#puts Benchmark.measure { puts BreadthSearch.new(root: root).find(2000) }
+#puts Benchmark.measure { puts HeuristicSearch.new(root: root).find(2000) }
 
-#puts Benchmark.measure { puts SolutionPrinter.solution(BreadthSearch.new(root: root).find(2000)) }
-#puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicASearch.new(root: root).find(2000)) }
+puts Benchmark.measure { puts SolutionPrinter.solution(BreadthSearch.new(root: root).find(2000)) }
+puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicSearch.new(root: root).find(2000)) }

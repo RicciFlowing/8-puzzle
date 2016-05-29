@@ -1,42 +1,54 @@
-class BreadthSearch
+class SearchAllgorithm
   def initialize(args)
     @root = args.fetch(:root)
-    @puzzles = Queue.new(data: @root)
   end
 
   def find(count)
     count.times do |i|
-     new_puzzles = @puzzles.get.children
-     new_puzzles.each do |current_puzzle|
-       if current_puzzle.correct?
-         p "Solution found in the #{i}th step"
-         return current_puzzle
-       end
-     end
-     @puzzles.add(new_puzzles)
+      result = find_hook
+      unless result.nil?
+        success(i)
+        return result
+      end
     end
-    return false
+    failure
+  end
+
+  def find_hook
+    new_puzzles = @puzzles.get.children
+    result = check_puzzles(new_puzzles)
+    @puzzles.add(new_puzzles)
+    return result
+  end
+
+  private
+    def success(i)
+      p "Solution found in the #{i}th step"
+    end
+    def failure
+      p "No Solution found"
+    end
+
+    def check_puzzles(puzzles)
+      puzzles.each do |current_puzzle|
+        if current_puzzle.correct?
+           return current_puzzle
+        end
+      end
+      return nil
+    end
+end
+
+class BreadthSearch < SearchAllgorithm
+  def initialize(args)
+    super(args)
+    @puzzles = Queue.new(data: @root)
   end
 end
 
-class HeuristicASearch
+class HeuristicSearch < SearchAllgorithm
   def initialize(args)
-    @root = args.fetch(:root)
+    super(args)
     @puzzles = PriorityQueue.new(data: @root)
-  end
-
-  def find(count)
-    count.times do |i|
-     new_puzzles = @puzzles.get.children
-     new_puzzles.each do |current_puzzle|
-       if current_puzzle.correct?
-         p "Solution found in the #{i}th step"
-         return current_puzzle
-       end
-     end
-     # Put new puzzles at the end of the array
-     @puzzles.add(new_puzzles)
-    end
-    return false
   end
 end
