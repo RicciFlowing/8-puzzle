@@ -12,6 +12,7 @@ class SearchAllgorithm
       end
     end
     failure
+    nil
   end
 
   def find_hook
