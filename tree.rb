@@ -21,7 +21,7 @@ class PuzzleNode < Node
   end
 
   def add_children
-    @children = Shuffle.next(@data).map!{ |x| PuzzleNode.new(data: x, previous: self) }
+    @children = @data.next.map!{ |x| PuzzleNode.new(data: x, previous: self) }
     @children
   end
 

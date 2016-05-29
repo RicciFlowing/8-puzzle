@@ -60,6 +60,16 @@ class Puzzle
     self
   end
 
+  def next()
+    temp = []
+    next_positions = empty.next(@dimension)
+    next_positions.each do |pos|
+      new_p = copy
+      temp << new_p.switch(empty, pos)
+    end
+    temp
+  end
+
   private
       def count_position(index, value)
         comp =   value.to_i > 0  ? value : (@dimension*@dimension)
@@ -96,16 +106,6 @@ class Position
 end
 
 module Shuffle
-
-  def self.next(puzzle)
-    temp = []
-    next_positions = puzzle.empty.next(puzzle.dimension)
-    next_positions.each do |pos|
-      new_p = puzzle.copy
-      temp << new_p.switch(puzzle.empty, pos)
-    end
-    temp
-  end
 
   def self.shuffle(puzzle,count=1)
     count.times do
