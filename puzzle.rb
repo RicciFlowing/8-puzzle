@@ -1,11 +1,15 @@
 class Puzzle
-  attr_reader :dimension
+  attr_reader :dimension, :positions
   attr_accessor :steps
 
   def initialize(args)
     @positions = args.fetch(:positions)
     @dimension = args.fetch(:dimension)
     @steps = args.fetch(:steps, 0)
+  end
+
+  def ==(other_puzzle)
+    @positions == other_puzzle.positions
   end
 
   def to_s

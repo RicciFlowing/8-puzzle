@@ -21,7 +21,12 @@ class PuzzleNode < Node
   end
 
   def add_children
-    @children = @data.next.map!{ |x| PuzzleNode.new(data: x, previous: self) }
+    @children = []
+    @data.next.each do |x|
+     unless(circled?(x))
+       @children.push PuzzleNode.new(data: x, previous: self)
+     end
+    end
     @children
   end
 
@@ -36,6 +41,18 @@ class PuzzleNode < Node
   def heuristic
     return  @data.count_false_positions
   end
+
+  private
+    def circled?(data)
+      if(@previous.nil?)
+        return false
+      elsif(@previous.data == data)
+        return true
+      else
+        return false
+      end
+
+    end
 end
 
 module SolutionPrinter
