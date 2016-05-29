@@ -61,7 +61,7 @@ module SolutionPrinter
       return "No solution found"
     end
     count = 0
-    str = ""
+    str = node.to_s
     until node.previous.nil? do
       count += 1
       node = node.previous
