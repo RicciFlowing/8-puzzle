@@ -40,14 +40,14 @@ class SearchAlgorithm
     end
 end
 
-class BreadthSearch < SearchAllgorithm
+class BreadthSearch < SearchAlgorithm
   def initialize(args)
     super(args)
     @puzzles = Queue.new(data: @root)
   end
 end
 
-class HeuristicSearch < SearchAllgorithm
+class HeuristicSearch < SearchAlgorithm
   def initialize(args)
     super(args)
     @puzzles = PriorityQueue.new(data: @root)
