@@ -11,11 +11,14 @@ puzzle3  = Shuffle.shuffle(puzzle, 15)
 puzzle3a = Puzzle.new(positions: [1,nil,5, 4, 3, 2, 7 ,8, 6], dimension: 3)
 
 puzzle4  = Puzzle.new(positions: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,nil], dimension: 4)
-puzzle5  = Shuffle.shuffle(puzzle4, 20)
-
+puzzle5  = Shuffle.shuffle(puzzle4, 30)
+#puts puzzle5
 root = PuzzleNode.new(data: puzzle5, previous: nil)
 #puts Benchmark.measure { puts BreadthSearch.new(root: root).find(2000) }
 #puts Benchmark.measure { puts HeuristicSearch.new(root: root).find(2000) }
 
 #puts Benchmark.measure { puts SolutionPrinter.solution(BreadthSearch.new(root: root).find(2000)) }
-puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicSearch.new(root: root).find(2000)) }
+#puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicSearch.new(root: root).find(3000)) }
+
+puzzle_hash = Puzzle.new(positions: [1,2,3,4,5,6,nil,7,8], dimension: 3)
+puzzle_hash2 = Puzzle.new(positions: [1,2,3,4,5,6,nil,7,8], dimension: 3)

@@ -1,4 +1,4 @@
-class SearchAllgorithm
+class SearchAlgorithm
   def initialize(args)
     @root = args.fetch(:root)
   end
