@@ -2,6 +2,7 @@ require_relative './puzzle.rb'
 require_relative './p_queue.rb'
 require_relative './tree.rb'
 require_relative './search.rb'
+require_relative './solution_printer.rb'
 require 'benchmark'
 
 
@@ -19,6 +20,3 @@ root = PuzzleNode.new(data: puzzle5, previous: nil)
 
 #puts Benchmark.measure { puts SolutionPrinter.solution(BreadthSearch.new(root: root).find(2000)) }
 #puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicSearch.new(root: root).find(3000)) }
-
-puzzle_hash = Puzzle.new(positions: [1,2,3,4,5,6,nil,7,8], dimension: 3)
-puzzle_hash2 = Puzzle.new(positions: [1,2,3,4,5,6,nil,7,8], dimension: 3)
