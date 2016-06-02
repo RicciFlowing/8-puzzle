@@ -24,6 +24,10 @@ class PuzzleNode < Node
     super(args)
   end
 
+  def steps
+    @data.steps
+  end
+
   def add_children
     @children = @data.next.map { |x| PuzzleNode.new(data: x, previous: self)}
     Pruner.prune!(@children)
@@ -41,12 +45,6 @@ class PuzzleNode < Node
   def heuristic
     return  @data.count_false_positions
   end
-
-  private
-    def circled?(node)
-      false
-      #Pruner.prune?(node,1)
-    end
 end
 
 module Pruner

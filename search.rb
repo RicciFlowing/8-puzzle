@@ -7,8 +7,8 @@ class SearchAlgorithm
     count.times do |i|
       result = find_hook
       unless result.nil?
-        success(i)
-        return result
+        success()
+        return Solution.new(node: result, nodes_searched: i)
       end
     end
     failure
@@ -23,8 +23,7 @@ class SearchAlgorithm
   end
 
   private
-    def success(i)
-      p "Solution found in the #{i}th step"
+    def success
     end
     def failure
       p "No Solution found"

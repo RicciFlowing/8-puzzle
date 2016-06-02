@@ -1,5 +1,18 @@
+class Solution
+  attr_reader :node, :searched_nodes
+  def initialize(args)
+    @node = args[:node]
+    @searched_nodes = args[:node]
+  end
+
+  def steps
+    @node.steps
+  end
+end
+
 module SolutionPrinter
-  def self.solution(node)
+  def self.solution(solution)
+    node = solution.node
     unless node
       return "No solution found"
     end
