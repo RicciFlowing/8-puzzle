@@ -13,6 +13,10 @@ class Node
   def to_s
     @data.to_s
   end
+
+  def eq?(second)
+    self.data === second.data
+  end
 end
 
 class PuzzleNode < Node
@@ -21,12 +25,8 @@ class PuzzleNode < Node
   end
 
   def add_children
-    @children = []
-    @data.next.each do |x|
-     unless(circled?(x))
-       @children.push PuzzleNode.new(data: x, previous: self)
-     end
-    end
+    @children = @data.next.map { |x| PuzzleNode.new(data: x, previous: self)}
+    Pruner.prune!(@children)
     @children
   end
 
@@ -43,14 +43,34 @@ class PuzzleNode < Node
   end
 
   private
-    def circled?(data)
-      if(@previous.nil?)
+    def circled?(node)
+      false
+      #Pruner.prune?(node,1)
+    end
+end
+
+module Pruner
+  extend self
+
+  def prune(nodes,  count = 1)
+    nodes.select {  |node| self.prune?(node, count)==false  }
+  end
+
+  def prune!(nodes, count = 1)
+    nodes.select! {  |node| self.prune?(node, count)==false  }
+  end
+
+  def prune?(node, count=1)
+    temp = node
+    count.times do
+      if(temp.previous.nil?)
         return false
-      elsif(@previous.data == data)
+      elsif(temp.eq? temp.previous)
         return true
       else
-        return false
+        temp = temp.previous
       end
-
     end
+    return false
+  end
 end
