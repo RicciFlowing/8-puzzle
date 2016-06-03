@@ -8,21 +8,26 @@ class Solution
   def steps
     @node.steps
   end
-end
 
-module SolutionPrinter
-  def self.solution(solution)
-    node = solution.node
+  def to_s
+    @node
     unless node
       return "No solution found"
     end
-    count = 0
-    str = node.to_s
-    until node.previous.nil? do
-      count += 1
-      node = node.previous
-      str += node.to_s unless node.to_s.nil?
-    end
-    str = str+ count.to_s
+    nodes_to_s
   end
+
+  private
+    def nodes_to_s
+      count = 0
+      node = @node
+      str = node.to_s
+      until node.previous.nil? do
+        count += 1
+        node = node.previous
+        str += count.to_s + "step \n"
+        str += node.to_s unless node.to_s.nil?
+      end
+      str = str+ count.to_s
+    end
 end

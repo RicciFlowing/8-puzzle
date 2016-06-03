@@ -21,4 +21,4 @@ root = PuzzleNode.new(data: puzzle4a, previous: nil)
 #puts Benchmark.measure { puts HeuristicSearch.new(root: root).find(2000) }
 
 #puts Benchmark.measure { puts SolutionPrinter.solution(BreadthSearch.new(root: root).find(50000)) }
-puts Benchmark.measure { puts SolutionPrinter.solution( HeuristicSearch.new(root: root).find(2000)) }
+puts Benchmark.measure { puts  HeuristicSearch.new(root: root).find(2000) }
