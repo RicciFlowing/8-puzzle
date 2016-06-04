@@ -7,12 +7,10 @@ class SearchAlgorithm
     count.times do |i|
       result = find_hook
       unless result.nil?
-        success()
         return Solution.new(node: result, nodes_searched: i)
       end
     end
-    failure
-    nil
+    return NullSolution.new(nodes_searched: count)
   end
 
   def find_hook
@@ -23,12 +21,6 @@ class SearchAlgorithm
   end
 
   private
-    def success
-    end
-    def failure
-      p "No Solution found"
-    end
-
     def check_puzzles(puzzles)
       puzzles.each do |current_puzzle|
         if current_puzzle.correct?

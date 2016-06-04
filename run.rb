@@ -2,7 +2,7 @@ require_relative './puzzle.rb'
 require_relative './p_queue.rb'
 require_relative './tree.rb'
 require_relative './search.rb'
-require_relative './solution_printer.rb'
+require_relative './solution.rb'
 require 'benchmark'
 
 
@@ -16,7 +16,7 @@ puzzle5  = Shuffle.shuffle(puzzle4, 15)
 puzzle4a  = Puzzle.new(positions: [2,nil,3,4,1,5,7,8,9,6,15,11,13,10,14,12], dimension: 4)
 
 
-root = PuzzleNode.new(data: puzzle4a, previous: nil)
+root = PuzzleNode.new(data: puzzle5, previous: nil)
 #puts Benchmark.measure { puts BreadthSearch.new(root: root).find(2000) }
 #puts Benchmark.measure { puts HeuristicSearch.new(root: root).find(2000) }
 

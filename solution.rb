@@ -1,8 +1,8 @@
 class Solution
-  attr_reader :node, :searched_nodes
+  attr_reader :node, :nodes_searched
   def initialize(args)
     @node = args[:node]
-    @searched_nodes = args[:node]
+    @searched_nodes = args[:nodes_searched]
   end
 
   def steps
@@ -11,9 +11,6 @@ class Solution
 
   def to_s
     @node
-    unless node
-      return "No solution found"
-    end
     nodes_to_s
   end
 
@@ -30,4 +27,18 @@ class Solution
       end
       str = str+ count.to_s
     end
+end
+
+class NullSolution < Solution
+  def initialize(args)
+    super(args)
+  end
+
+  def to_s
+    return "No solution found"
+  end
+
+  def steps
+    nil
+  end
 end
