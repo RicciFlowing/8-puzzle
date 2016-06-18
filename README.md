@@ -32,7 +32,15 @@ Create a root-node for searching:
 
 root = PuzzleNode.new(data: puzzle)
 
-Start using one of search algorithms (with an upper bound of searched configuration of 2000): 
+Start using one of search algorithms (with an upper bound of searched configuration of 2000):
 
 puts BreadthSearch.new(root: root).find(2000)
 puts HeuristicSearch.new(root: root).find(2000)
+
+
+The Shuffle module is in option to shuffle a sorted puzzle. The first parameter is the starting puzzle, the second argument is the number of shuffling steps.
+
+The shuffle module creates always a solveable puzzl. This is important as a random puzzle has a good chance to have no solution. 
+
+puzzle = Puzzle.new(positions: [1,2,3,4,5,6,7,8,nil], dimension: 3)
+puzzle2  = Shuffle.shuffle(puzzle, 15)
