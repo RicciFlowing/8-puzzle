@@ -1,4 +1,3 @@
-
 class Queue
   def initialize(args)
     @data = args.fetch(:data).to_a || []

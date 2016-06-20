@@ -24,6 +24,7 @@ end
 class PuzzleNode < Node
   def initialize(args)
     super(args)
+    @heuristic =args.fetch(:heuristic, Heuristic).new(@data)
   end
 
   def steps
@@ -45,6 +46,6 @@ class PuzzleNode < Node
   end
 
   def heuristic
-    return  @data.count_false_positions
+    return  @heuristic.value
   end
 end
