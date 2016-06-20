@@ -1,4 +1,5 @@
 require_relative './puzzle.rb'
+require_relative './shuffle.rb'
 require_relative './p_queue.rb'
 require_relative './tree.rb'
 require_relative './search.rb'
