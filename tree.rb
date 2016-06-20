@@ -24,7 +24,8 @@ end
 class PuzzleNode < Node
   def initialize(args)
     super(args)
-    @heuristic =args.fetch(:heuristic, Heuristic).new(@data)
+    @heuristic_class  = args.fetch(:heuristic, Heuristic)
+    @heuristic = @heuristic_class.new(@data)
   end
 
   def steps
@@ -32,7 +33,7 @@ class PuzzleNode < Node
   end
 
   def add_children
-    @children = @data.next.map { |x| PuzzleNode.new(data: x, previous: self)}
+    @children = @data.next.map { |x| PuzzleNode.new(data: x, previous: self, heuristic: @heuristic_class )}
     Pruner.prune!(@children)
     @children
   end
